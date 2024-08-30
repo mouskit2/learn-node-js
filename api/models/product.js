@@ -4,16 +4,22 @@ const productSchema = mongoose.Schema({
     _id: mongoose.Types.ObjectId,
     name: {
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator: function(value) {
+                return (value.trim()).length> 0;
+            },
+            message: 'name must be have less one letter'
+        }
     },
     price: { 
-        type: Number, 
+        type: Number,
         required: true,
         validate: {
             validator: function(value) {
                 return value >= 0;
             },
-            message: 'Price must be a positive number'
+            message: 'price must be a positive number'
         }
     }
 });
